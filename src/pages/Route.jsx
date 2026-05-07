@@ -7,6 +7,7 @@ import { formatKm, formatDuration, formatLper100km, formatDateLocal } from '@/li
 import { buildGpx, downloadGpx } from '@/lib/gpx'
 import MapView from '@/components/MapView'
 import TelemetryCharts from '@/components/TelemetryCharts'
+import AddToCollectionMenu from '@/components/AddToCollectionMenu'
 
 function Stat({ label, value }) {
   return (
@@ -91,14 +92,17 @@ export default function RoutePage() {
             {consumption}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={onExport}
-          disabled={points.length === 0}
-          className="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm hover:bg-slate-50 disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800"
-        >
-          {t('pages.route.exportGpx')}
-        </button>
+        <div className="flex items-center gap-2">
+          <AddToCollectionMenu routeId={id} />
+          <button
+            type="button"
+            onClick={onExport}
+            disabled={points.length === 0}
+            className="rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm hover:bg-slate-50 disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800"
+          >
+            {t('pages.route.exportGpx')}
+          </button>
+        </div>
       </div>
 
       <MapView tracks={tracks} height={420} />

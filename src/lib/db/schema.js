@@ -99,6 +99,23 @@ const migrations = [
   FROM route
   GROUP BY day, vehicle_id;
   `,
+  // v2 — tour collections
+  `
+  CREATE TABLE tour_collection (
+    id            TEXT PRIMARY KEY,
+    name          TEXT NOT NULL,
+    notes         TEXT,
+    created_at_ms INTEGER NOT NULL
+  );
+
+  CREATE TABLE tour_collection_route (
+    collection_id TEXT NOT NULL REFERENCES tour_collection(id) ON DELETE CASCADE,
+    route_id      TEXT NOT NULL REFERENCES route(id)           ON DELETE CASCADE,
+    added_at_ms   INTEGER NOT NULL,
+    PRIMARY KEY (collection_id, route_id)
+  );
+  CREATE INDEX idx_tcr_route ON tour_collection_route(route_id);
+  `,
 ]
 
 function getSchemaVersion(db) {

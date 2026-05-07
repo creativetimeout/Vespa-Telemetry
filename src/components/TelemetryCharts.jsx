@@ -42,7 +42,25 @@ function fmtTimeOfDay(ms, locale) {
   return new Date(ms).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })
 }
 
-function Chart({ title, unit, data, color, yDomain, locale }) {
+function fmtDateHour(ms, locale) {
+  const d = new Date(ms)
+  const date = d.toLocaleDateString(locale, { month: 'short', day: '2-digit' })
+  const hour = d.toLocaleTimeString(locale, { hour: '2-digit' })
+  return `${date} ${hour}`
+}
+
+function fmtDateTime(ms, locale) {
+  const d = new Date(ms)
+  const date = d.toLocaleDateString(locale, { month: 'short', day: '2-digit' })
+  const time = d.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })
+  return `${date} ${time}`
+}
+
+const MULTI_DAY_MS = 24 * 60 * 60 * 1000
+
+function Chart({ title, unit, data, color, yDomain, locale, multiDay }) {
+  const tickFmt = multiDay ? fmtDateHour : fmtTimeOfDay
+  const tooltipFmt = multiDay ? fmtDateTime : fmtTimeOfDay
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
       <div className="mb-2 flex items-baseline justify-between">
@@ -57,7 +75,8 @@ function Chart({ title, unit, data, color, yDomain, locale }) {
               dataKey="t"
               type="number"
               domain={['dataMin', 'dataMax']}
-              tickFormatter={(t) => fmtTimeOfDay(t, locale)}
+              tickFormatter={(t) => tickFmt(t, locale)}
+              minTickGap={multiDay ? 40 : 20}
               tick={{ fontSize: 11 }}
               stroke="currentColor"
             />
@@ -69,7 +88,7 @@ function Chart({ title, unit, data, color, yDomain, locale }) {
             />
             <Tooltip
               formatter={(v) => [v?.toFixed?.(1) ?? v, unit]}
-              labelFormatter={(t) => fmtTimeOfDay(t, locale)}
+              labelFormatter={(t) => tooltipFmt(t, locale)}
               contentStyle={{ fontSize: 12 }}
             />
             <Line type="monotone" dataKey="v" stroke={color} dot={false} strokeWidth={1.5} isAnimationActive={false} connectNulls={false} />
@@ -96,14 +115,27 @@ export default function TelemetryCharts({ telemetry, points }) {
     }
   }, [telemetry, points])
 
+  const multiDay = useMemo(() => {
+    const stamps = []
+    if (telemetry.length) {
+      stamps.push(telemetry[0].ts_ms, telemetry[telemetry.length - 1].ts_ms)
+    }
+    if (points.length) {
+      stamps.push(points[0].ts_ms, points[points.length - 1].ts_ms)
+    }
+    const finite = stamps.filter(Number.isFinite)
+    if (finite.length < 2) return false
+    return Math.max(...finite) - Math.min(...finite) > MULTI_DAY_MS
+  }, [telemetry, points])
+
   return (
     <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-      <Chart title={t('charts.speed')} unit="km/h" data={charts.speed} color="#0ea5e9" yDomain={[0, 'auto']} locale={locale} />
-      <Chart title={t('charts.elevation')} unit="m" data={charts.elevation} color="#10b981" locale={locale} />
-      <Chart title={t('charts.rpm')} unit="rpm" data={charts.rpm} color="#a855f7" yDomain={[0, 'auto']} locale={locale} />
-      <Chart title={t('charts.throttle')} unit="%" data={charts.throttle} color="#f59e0b" yDomain={[0, 100]} locale={locale} />
-      <Chart title={t('charts.engineTemp')} unit="°C" data={charts.engineTemp} color="#ef4444" locale={locale} />
-      <Chart title={t('charts.battery')} unit="V" data={charts.battery} color="#6366f1" locale={locale} />
+      <Chart title={t('charts.speed')} unit="km/h" data={charts.speed} color="#0ea5e9" yDomain={[0, 'auto']} locale={locale} multiDay={multiDay} />
+      <Chart title={t('charts.elevation')} unit="m" data={charts.elevation} color="#10b981" locale={locale} multiDay={multiDay} />
+      <Chart title={t('charts.rpm')} unit="rpm" data={charts.rpm} color="#a855f7" yDomain={[0, 'auto']} locale={locale} multiDay={multiDay} />
+      <Chart title={t('charts.throttle')} unit="%" data={charts.throttle} color="#f59e0b" yDomain={[0, 100]} locale={locale} multiDay={multiDay} />
+      <Chart title={t('charts.engineTemp')} unit="°C" data={charts.engineTemp} color="#ef4444" locale={locale} multiDay={multiDay} />
+      <Chart title={t('charts.battery')} unit="V" data={charts.battery} color="#6366f1" locale={locale} multiDay={multiDay} />
     </div>
   )
 }

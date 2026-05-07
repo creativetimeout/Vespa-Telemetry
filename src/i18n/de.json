@@ -6,7 +6,10 @@
     "dashboard": "Übersicht",
     "import": "Import",
     "vespa": "Vespa",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "tours": "Touren",
+    "collapse": "Seitenleiste einklappen",
+    "expand": "Seitenleiste ausklappen"
   },
   "actions": {
     "import": "Datei importieren"
@@ -76,6 +79,26 @@
         "lastServiceOdometer": "Letzter Service km-Stand",
         "batteryVoltage": "Batterie"
       }
+    },
+    "tours": {
+      "title": "Touren",
+      "newTour": "Neue Tour",
+      "create": "Anlegen",
+      "cancel": "Abbrechen",
+      "namePlaceholder": "Tour-Name",
+      "notesPlaceholder": "Notizen (optional)",
+      "empty": "Noch keine Touren. Lege eine an und füge Fahrten aus den Tages- oder Fahrtseiten hinzu.",
+      "addToTour": "Zur Tour hinzufügen",
+      "removeFromTour": "Entfernen",
+      "noneInTour": "Noch keine Fahrten in dieser Tour.",
+      "addTrips": "Fahrten hinzufügen",
+      "delete": "Tour löschen",
+      "rename": "Umbenennen",
+      "save": "Speichern",
+      "confirmDelete": "Diese Tour löschen? Die Fahrten bleiben erhalten.",
+      "exportGpx": "Tour-GPX exportieren",
+      "trips": "Fahrten",
+      "stats": "{{routes}} Fahrten · {{distance}} · {{duration}}"
     },
     "settings": {
       "title": "Einstellungen",

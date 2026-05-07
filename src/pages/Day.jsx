@@ -7,6 +7,7 @@ import { formatKm, formatDuration, formatLper100km, formatDateLocal } from '@/li
 import { buildGpx, downloadGpx } from '@/lib/gpx'
 import MapView, { TRACK_COLORS } from '@/components/MapView'
 import TelemetryCharts from '@/components/TelemetryCharts'
+import AddToCollectionMenu from '@/components/AddToCollectionMenu'
 
 function timeOnly(ms, locale) {
   if (!Number.isFinite(ms)) return '—'
@@ -115,11 +116,8 @@ export default function Day() {
             </h2>
             <ul className="divide-y divide-slate-200 rounded-lg border border-slate-200 dark:divide-slate-800 dark:border-slate-800">
               {routes.map((r, i) => (
-                <li key={r.id}>
-                  <Link
-                    to={`/route/${r.id}`}
-                    className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-900"
-                  >
+                <li key={r.id} className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-900">
+                  <Link to={`/route/${r.id}`} className="flex flex-1 items-center gap-3">
                     <span
                       aria-hidden
                       className="h-3 w-3 shrink-0 rounded-full"
@@ -135,6 +133,7 @@ export default function Day() {
                         : ''}
                     </span>
                   </Link>
+                  <AddToCollectionMenu routeId={r.id} compact />
                 </li>
               ))}
             </ul>
