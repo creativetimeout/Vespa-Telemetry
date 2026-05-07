@@ -1,0 +1,91 @@
+{
+  "app": {
+    "title": "Vespa Telemetry"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "import": "Import",
+    "vespa": "Vespa",
+    "settings": "Settings"
+  },
+  "actions": {
+    "import": "Import file"
+  },
+  "charts": {
+    "speed": "Speed",
+    "elevation": "Elevation",
+    "rpm": "RPM",
+    "throttle": "Throttle",
+    "engineTemp": "Engine temp",
+    "battery": "Battery"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard",
+      "empty": "No data yet. Import your Vespa export to get started.",
+      "totals": "Totals",
+      "routes": "Routes",
+      "distance": "Distance",
+      "duration": "Duration",
+      "consumption": "Avg. consumption",
+      "recentDays": "Recent days"
+    },
+    "import": {
+      "title": "Import",
+      "drop": "Drop your Vespa export JSON file here, or click to choose",
+      "choose": "Choose file",
+      "stage": {
+        "reading": "Reading file…",
+        "decrypting": "Decrypting…",
+        "parsing": "Parsing…",
+        "compressing": "Compressing image…",
+        "inserting": "Saving to database…",
+        "done": "Done"
+      },
+      "summary": "{{added}} routes added, {{skipped}} skipped",
+      "error": "Import failed: {{message}}"
+    },
+    "day": {
+      "title": "Day {{date}}",
+      "exportGpx": "Export day GPX",
+      "routes": "Routes",
+      "noRoutes": "No routes on this day."
+    },
+    "route": {
+      "title": "Route",
+      "exportGpx": "Export GPX",
+      "telemetry": "Telemetry",
+      "stats": {
+        "maxSpeed": "Max speed",
+        "maxRpm": "Max RPM",
+        "fuel": "Fuel",
+        "tcInterventions": "TC interventions"
+      },
+      "notFound": "Route not found."
+    },
+    "vespa": {
+      "title": "Vespa",
+      "fields": {
+        "model": "Model",
+        "modelYear": "Model year",
+        "vin": "VIN",
+        "serial": "Serial",
+        "engineSize": "Engine size",
+        "totalMileage": "Total mileage",
+        "lastServiceDate": "Last service",
+        "lastServiceOdometer": "Last service mileage",
+        "batteryVoltage": "Battery"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "language": "Language",
+      "database": "Database",
+      "exportDb": "Export database",
+      "importDb": "Import database",
+      "clearDb": "Clear database",
+      "confirmClear": "Delete all imported data?",
+      "dbStatus": "{{routes}} routes, {{vehicles}} vehicles"
+    }
+  }
+}

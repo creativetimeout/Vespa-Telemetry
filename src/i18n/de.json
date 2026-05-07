@@ -1,0 +1,91 @@
+{
+  "app": {
+    "title": "Vespa Telemetrie"
+  },
+  "nav": {
+    "dashboard": "Übersicht",
+    "import": "Import",
+    "vespa": "Vespa",
+    "settings": "Einstellungen"
+  },
+  "actions": {
+    "import": "Datei importieren"
+  },
+  "charts": {
+    "speed": "Geschwindigkeit",
+    "elevation": "Höhe",
+    "rpm": "Drehzahl",
+    "throttle": "Gas",
+    "engineTemp": "Motortemperatur",
+    "battery": "Batterie"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Übersicht",
+      "empty": "Noch keine Daten. Importiere deinen Vespa-Export, um zu starten.",
+      "totals": "Gesamt",
+      "routes": "Fahrten",
+      "distance": "Strecke",
+      "duration": "Dauer",
+      "consumption": "Ø Verbrauch",
+      "recentDays": "Letzte Tage"
+    },
+    "import": {
+      "title": "Import",
+      "drop": "Vespa-Export-JSON hier ablegen oder klicken zum Auswählen",
+      "choose": "Datei wählen",
+      "stage": {
+        "reading": "Datei wird gelesen…",
+        "decrypting": "Entschlüsseln…",
+        "parsing": "Auswerten…",
+        "compressing": "Bild wird komprimiert…",
+        "inserting": "Speichern in Datenbank…",
+        "done": "Fertig"
+      },
+      "summary": "{{added}} Fahrten hinzugefügt, {{skipped}} übersprungen",
+      "error": "Import fehlgeschlagen: {{message}}"
+    },
+    "day": {
+      "title": "Tag {{date}}",
+      "exportGpx": "Tages-GPX exportieren",
+      "routes": "Fahrten",
+      "noRoutes": "Keine Fahrten an diesem Tag."
+    },
+    "route": {
+      "title": "Fahrt",
+      "exportGpx": "GPX exportieren",
+      "telemetry": "Telemetrie",
+      "stats": {
+        "maxSpeed": "Höchstgeschw.",
+        "maxRpm": "Max. Drehzahl",
+        "fuel": "Verbrauch",
+        "tcInterventions": "TC-Eingriffe"
+      },
+      "notFound": "Fahrt nicht gefunden."
+    },
+    "vespa": {
+      "title": "Vespa",
+      "fields": {
+        "model": "Modell",
+        "modelYear": "Modelljahr",
+        "vin": "FIN",
+        "serial": "Seriennummer",
+        "engineSize": "Hubraum",
+        "totalMileage": "Gesamtkilometer",
+        "lastServiceDate": "Letzter Service",
+        "lastServiceOdometer": "Letzter Service km-Stand",
+        "batteryVoltage": "Batterie"
+      }
+    },
+    "settings": {
+      "title": "Einstellungen",
+      "language": "Sprache",
+      "database": "Datenbank",
+      "exportDb": "Datenbank exportieren",
+      "importDb": "Datenbank importieren",
+      "clearDb": "Datenbank löschen",
+      "confirmClear": "Alle importierten Daten löschen?",
+      "dbStatus": "{{routes}} Fahrten, {{vehicles}} Fahrzeuge"
+    }
+  }
+}
