@@ -1,6 +1,13 @@
-# Vespa Telemetry
+<p align="center">
+  <img src="public/Vespa-Telemetry.png" alt="Vespa Telemetry" width="160" />
+</p>
 
-Visualize routes, daily aggregates, and telemetry data from your Vespa app export — entirely in your browser.
+<h1 align="center">Vespa Telemetry</h1>
+
+<p align="center">
+  Visualize routes, daily aggregates, and telemetry data from your Vespa app export — entirely in your browser.
+</p>
+
 
 ## What it does
 

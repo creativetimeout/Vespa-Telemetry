@@ -28,9 +28,16 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight">
-        {t('pages.dashboard.title')}
-      </h1>
+      <div className="flex items-center gap-4">
+        <img
+          src="/Vespa-Telemetry.png"
+          alt=""
+          className="h-16 w-16 shrink-0 rounded-2xl shadow-sm"
+        />
+        <h1 className="text-2xl font-semibold tracking-tight">
+          {t('pages.dashboard.title')}
+        </h1>
+      </div>
 
       {isEmpty ? (
         <p className="text-slate-500">{t('pages.dashboard.empty')}</p>
