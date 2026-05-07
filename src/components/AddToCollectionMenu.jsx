@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import { ListPlus } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -17,6 +18,32 @@ export default function AddToCollectionMenu({ routeId, compact = false }) {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
   const containerRef = useRef(null)
+  const buttonRef = useRef(null)
+  const menuRef = useRef(null)
+  const [pos, setPos] = useState({ top: 0, left: 0 })
+
+  useLayoutEffect(() => {
+    if (!open) return
+    function updatePos() {
+      const btn = buttonRef.current
+      if (!btn) return
+      const rect = btn.getBoundingClientRect()
+      const menuWidth = 256
+      const margin = 8
+      let left = rect.right - menuWidth
+      if (left < margin) left = margin
+      const maxLeft = window.innerWidth - menuWidth - margin
+      if (left > maxLeft) left = Math.max(margin, maxLeft)
+      setPos({ top: rect.bottom + 4, left })
+    }
+    updatePos()
+    window.addEventListener('resize', updatePos)
+    window.addEventListener('scroll', updatePos, true)
+    return () => {
+      window.removeEventListener('resize', updatePos)
+      window.removeEventListener('scroll', updatePos, true)
+    }
+  }, [open])
 
   const allQ = useDbQuery(() => (open && ready ? getCollections() : []), [open, ready])
   const memberQ = useDbQuery(
@@ -29,7 +56,9 @@ export default function AddToCollectionMenu({ routeId, compact = false }) {
   useEffect(() => {
     if (!open) return
     function onDocClick(e) {
-      if (containerRef.current && !containerRef.current.contains(e.target)) {
+      const inContainer = containerRef.current && containerRef.current.contains(e.target)
+      const inMenu = menuRef.current && menuRef.current.contains(e.target)
+      if (!inContainer && !inMenu) {
         setOpen(false)
       }
     }
@@ -57,6 +86,7 @@ export default function AddToCollectionMenu({ routeId, compact = false }) {
   return (
     <div ref={containerRef} className="relative inline-block" onClick={(e) => e.stopPropagation()}>
       <button
+        ref={buttonRef}
         type="button"
         onClick={(e) => {
           e.preventDefault()
@@ -72,8 +102,12 @@ export default function AddToCollectionMenu({ routeId, compact = false }) {
         <ListPlus className={compact ? 'h-3.5 w-3.5' : 'h-4 w-4'} />
         {!compact && <span>{t('pages.tours.addToTour')}</span>}
       </button>
-      {open && (
-        <div className="absolute right-0 z-20 mt-1 w-64 rounded-md border border-slate-200 bg-white p-2 shadow-lg dark:border-slate-800 dark:bg-slate-900">
+      {open && createPortal(
+        <div
+          ref={menuRef}
+          onClick={(e) => e.stopPropagation()}
+          style={{ position: 'fixed', top: pos.top, left: pos.left, width: 256, zIndex: 10000 }}
+          className="rounded-md border border-slate-200 bg-white p-2 shadow-lg dark:border-slate-800 dark:bg-slate-900">
           {all.length === 0 ? (
             <p className="px-2 py-1.5 text-xs text-slate-500">{t('pages.tours.empty')}</p>
           ) : (
@@ -113,7 +147,8 @@ export default function AddToCollectionMenu({ routeId, compact = false }) {
               {t('pages.tours.create')}
             </button>
           </form>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )
