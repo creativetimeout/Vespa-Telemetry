@@ -35,6 +35,11 @@ export default function Settings() {
     setBusy(true)
     try {
       const buf = new Uint8Array(await file.arrayBuffer())
+      const head = new TextDecoder('latin1').decode(buf.slice(0, 16))
+      if (head !== 'SQLite format 3\0') {
+        alert(t('pages.settings.importInvalid'))
+        return
+      }
       await replaceWithBytes(buf)
       bump()
     } finally {
@@ -115,7 +120,7 @@ export default function Settings() {
           <input
             ref={fileInput}
             type="file"
-            accept=".sqlite,.db,application/x-sqlite3"
+            accept=".sqlite,.db,application/x-sqlite3,application/octet-stream,*/*"
             className="hidden"
             onChange={onImportFile}
           />

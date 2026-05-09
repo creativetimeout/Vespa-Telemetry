@@ -9,7 +9,13 @@
     "settings": "Einstellungen",
     "tours": "Touren",
     "collapse": "Seitenleiste einklappen",
-    "expand": "Seitenleiste ausklappen"
+    "expand": "Seitenleiste ausklappen",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz",
+    "darkMode": "Dunklen Modus aktivieren",
+    "lightMode": "Hellen Modus aktivieren"
   },
   "actions": {
     "import": "Datei importieren"
@@ -108,7 +114,67 @@
       "importDb": "Datenbank importieren",
       "clearDb": "Datenbank löschen",
       "confirmClear": "Alle importierten Daten löschen?",
-      "dbStatus": "{{routes}} Fahrten, {{vehicles}} Fahrzeuge"
+      "dbStatus": "{{routes}} Fahrten, {{vehicles}} Fahrzeuge",
+      "importInvalid": "Die ausgewählte Datei ist kein gültiger SQLite-Datenbankexport."
+    },
+    "about": {
+      "title": "Über diese App",
+      "description": "Vespa Telemetrie visualisiert die GPS-Routen und Telemetriedaten aus dem Export deiner Vespa-App.\n\nDie gesamte Verarbeitung findet in deinem Browser statt – nichts wird hochgeladen. Deine importierten Daten bleiben auf diesem Gerät.\n\nImportiere eine Exportdatei über Einstellungen → Import, um zu starten."
+    },
+    "impressum": {
+      "title": "Impressum",
+      "providerHeading": "Angaben gemäß § 5 DDG",
+      "contactHeading": "Kontakt",
+      "emailLabel": "E-Mail:",
+      "vatHeading": "Umsatzsteuer",
+      "responsibleHeading": "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV",
+      "disclaimerHeading": "Haftungsausschluss",
+      "contentLiabilityHeading": "Haftung für Inhalte",
+      "contentLiabilityText": "Die Inhalte dieser Seiten wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.",
+      "linkLiabilityHeading": "Haftung für Links",
+      "linkLiabilityText": "Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.",
+      "copyrightHeading": "Urheberrecht",
+      "copyrightText": "Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet."
+    },
+    "datenschutz": {
+      "title": "Datenschutzerklärung",
+      "controller": {
+        "heading": "1. Verantwortlicher"
+      },
+      "principle": {
+        "heading": "2. Grundsatz",
+        "body": "Diese Anwendung läuft vollständig in deinem Browser. Importierte Vespa-Exportdateien werden lokal auf deinem Gerät verarbeitet und niemals an einen Server übertragen."
+      },
+      "localStorage": {
+        "heading": "3. Lokale Datenspeicherung auf deinem Gerät",
+        "body": "localStorage: Der Schlüssel i18nextLng speichert deine gewählte Oberflächensprache. Diese Speicherung ist für den Betrieb der Anwendung unbedingt erforderlich und einwilligungsfrei (§ 25 Abs. 2 Nr. 2 TTDSG / TDDDG).\n\nIndexedDB: Die importierten Vespa-Daten und daraus abgeleitete Informationen (Fahrten, Telemetrie, Touren) werden ausschließlich auf deinem Gerät gespeichert. Du kannst diese Daten jederzeit über Einstellungen → Datenbank löschen oder über die Browser-Funktion zum Löschen der Website-Daten entfernen."
+      },
+      "serverLogs": {
+        "heading": "4. Server-Logfiles (Hosting)",
+        "body": "Beim Aufruf dieser Website protokolliert der Webserver automatisch technische Zugriffsdaten: IP-Adresse, Datum und Uhrzeit der Anfrage, angefragte URL, Referrer-URL und User-Agent des Browsers. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am Betrieb, der Stabilität und der Sicherheit des Dienstes). Die Logfiles werden für einen kurzen Zeitraum (in der Regel bis zu 7 Tage) zu Sicherheits- und Diagnosezwecken aufbewahrt und anschließend gelöscht."
+      },
+      "processor": {
+        "heading": "5. Auftragsverarbeiter (Hosting-Anbieter)"
+      },
+      "maps": {
+        "heading": "6. Karten / OpenStreetMap",
+        "body": "Kartenkacheln werden von tile.openstreetmap.org geladen, betrieben von der OpenStreetMap Foundation (Vereinigtes Königreich). Beim Laden der Kacheln wird deine IP-Adresse an die OpenStreetMap Foundation übertragen. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Anzeige von Karten). Vor dem Aufruf einer Seite mit Karte wird keine Kachel geladen. Weitere Informationen:"
+      },
+      "noTracking": {
+        "heading": "7. Keine Cookies, kein Tracking, keine Analyse",
+        "body": "Diese Anwendung verwendet keine Cookies, keine Analyse-Werkzeuge, keine Tracker Dritter, keine Werbung und keine Social-Media-Plugins."
+      },
+      "noUpload": {
+        "heading": "8. Keine Übertragung importierter Daten",
+        "body": "Vespa-Exportdateien und alle daraus abgeleiteten Daten werden ausschließlich in deinem Browser verarbeitet und niemals an einen Server hochgeladen."
+      },
+      "rights": {
+        "heading": "9. Deine Rechte (Art. 15–21 DSGVO)",
+        "body": "Du hast das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21). Zur Wahrnehmung dieser Rechte wende dich bitte an:"
+      },
+      "complaint": {
+        "heading": "10. Beschwerderecht"
+      }
     }
   }
 }

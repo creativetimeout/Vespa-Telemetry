@@ -203,8 +203,8 @@ export default function TourDetail() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <div className="min-w-0 flex-1">
+      <div className="flex flex-col gap-3 lg:flex-row lg:flex-wrap lg:items-baseline lg:justify-between">
+        <div className="min-w-0 lg:flex-1">
           {editing ? (
             <form onSubmit={onSaveName} className="flex gap-2">
               <input

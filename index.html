@@ -7,6 +7,15 @@
     <link rel="apple-touch-icon" href="/favicon-256.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vespa Telemetry</title>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var dark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

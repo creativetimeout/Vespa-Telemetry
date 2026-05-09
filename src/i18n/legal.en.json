@@ -1,0 +1,23 @@
+{
+  "pages": {
+    "impressum": {
+      "emailUser": "[YOUR_EMAIL_USER]",
+      "emailDomain": "[YOUR_EMAIL_DOMAIN]",
+      "providerBlock": "[YOUR_COMPANY_OR_NAME]\n[YOUR_FULL_NAME]\n[YOUR_STREET_AND_NUMBER]\n[YOUR_ZIP_AND_CITY]\n[YOUR_COUNTRY]",
+      "vatText": "[YOUR_VAT_STATEMENT — e.g. 'Pursuant to § 19 UStG, no VAT is shown (small-business rule)' or 'VAT-ID: DE000000000']",
+      "responsibleText": "[YOUR_FULL_NAME], address as above."
+    },
+    "datenschutz": {
+      "lastUpdated": "Last updated: [MONTH YEAR]",
+      "controller": {
+        "body": "[YOUR_COMPANY_OR_NAME]\n[YOUR_FULL_NAME]\n[YOUR_STREET_AND_NUMBER]\n[YOUR_ZIP_AND_CITY]\n[YOUR_COUNTRY]"
+      },
+      "processor": {
+        "body": "Hosting is provided by:\n\n[HOSTER_LEGAL_NAME]\n[HOSTER_STREET]\n[HOSTER_ZIP_AND_CITY]\n[HOSTER_COUNTRY]\n\nRegister court: [HOSTER_COURT], [HOSTER_HRB]\nVAT-ID: [HOSTER_VAT_ID]\nManaging directors: [HOSTER_DIRECTORS]\n\nProcessing takes place under a data processing agreement pursuant to Art. 28 GDPR."
+      },
+      "complaint": {
+        "body": "You have the right to lodge a complaint with a data protection supervisory authority. The competent authority for our location is:\n\n[YOUR_SUPERVISORY_AUTHORITY_NAME]\n[YOUR_SUPERVISORY_AUTHORITY_ADDRESS]"
+      }
+    }
+  }
+}

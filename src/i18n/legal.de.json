@@ -1,0 +1,23 @@
+{
+  "pages": {
+    "impressum": {
+      "emailUser": "[YOUR_EMAIL_USER]",
+      "emailDomain": "[YOUR_EMAIL_DOMAIN]",
+      "providerBlock": "[YOUR_COMPANY_OR_NAME]\n[YOUR_FULL_NAME]\n[YOUR_STREET_AND_NUMBER]\n[YOUR_ZIP_AND_CITY]\n[YOUR_COUNTRY]",
+      "vatText": "[YOUR_VAT_STATEMENT — z. B. 'Gemäß § 19 UStG wird keine Umsatzsteuer ausgewiesen (Kleinunternehmerregelung)' oder 'USt-IdNr.: DE000000000']",
+      "responsibleText": "[YOUR_FULL_NAME], Anschrift wie oben."
+    },
+    "datenschutz": {
+      "lastUpdated": "Stand: [MONAT JAHR]",
+      "controller": {
+        "body": "[YOUR_COMPANY_OR_NAME]\n[YOUR_FULL_NAME]\n[YOUR_STREET_AND_NUMBER]\n[YOUR_ZIP_AND_CITY]\n[YOUR_COUNTRY]"
+      },
+      "processor": {
+        "body": "Das Hosting erfolgt bei:\n\n[HOSTER_LEGAL_NAME]\n[HOSTER_STREET]\n[HOSTER_ZIP_AND_CITY]\n[HOSTER_COUNTRY]\n\nRegistergericht: [HOSTER_COURT], [HOSTER_HRB]\nUSt-IdNr.: [HOSTER_VAT_ID]\nGeschäftsführer: [HOSTER_DIRECTORS]\n\nDie Verarbeitung erfolgt im Rahmen eines Auftragsverarbeitungsvertrags gemäß Art. 28 DSGVO."
+      },
+      "complaint": {
+        "body": "Dir steht das Recht zu, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Zuständig für unseren Sitz ist:\n\n[YOUR_SUPERVISORY_AUTHORITY_NAME]\n[YOUR_SUPERVISORY_AUTHORITY_ADDRESS]"
+      }
+    }
+  }
+}

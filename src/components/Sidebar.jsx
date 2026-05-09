@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import Brand from './Brand'
 import {
   Upload,
   LayoutDashboard,
@@ -10,12 +11,17 @@ import {
   ChevronLeft,
   ChevronRight,
   Plus,
+  Sun,
+  Moon,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useDb, useDbQuery } from '@/lib/db/DbProvider'
 import { getCollections, createCollection } from '@/lib/db/queries'
+import { useTheme } from '@/lib/theme'
 
-function LanguageToggle({ collapsed }) {
+const FLAGS = { de: '🇩🇪', en: '🇬🇧' }
+
+function LanguageToggle() {
   const { i18n } = useTranslation()
   const current = i18n.resolvedLanguage
   const next = current === 'de' ? 'en' : 'de'
@@ -23,20 +29,38 @@ function LanguageToggle({ collapsed }) {
     <button
       type="button"
       onClick={() => i18n.changeLanguage(next)}
-      className="text-xs font-medium uppercase tracking-wide text-slate-500 hover:text-slate-900 dark:hover:text-slate-100"
+      className="rounded text-lg leading-none hover:opacity-80"
       aria-label="Toggle language"
       title={current?.toUpperCase()}
     >
-      {collapsed ? (current?.[0] ?? '').toUpperCase() : current?.toUpperCase()}
+      {FLAGS[current] ?? current?.toUpperCase()}
     </button>
   )
 }
 
-function NavItem({ to, icon: Icon, label, collapsed, end }) {
+function ThemeToggle() {
+  const { t } = useTranslation()
+  const { resolved, toggle } = useTheme()
+  const isDark = resolved === 'dark'
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      className="rounded p-1 text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+      aria-label={t(isDark ? 'nav.lightMode' : 'nav.darkMode')}
+      title={t(isDark ? 'nav.lightMode' : 'nav.darkMode')}
+    >
+      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+    </button>
+  )
+}
+
+function NavItem({ to, icon: Icon, label, collapsed, end, onNavigate }) {
   return (
     <NavLink
       to={to}
       end={end}
+      onClick={onNavigate}
       title={collapsed ? label : undefined}
       className={({ isActive }) =>
         cn(
@@ -54,10 +78,9 @@ function NavItem({ to, icon: Icon, label, collapsed, end }) {
   )
 }
 
-export default function Sidebar() {
+export function SidebarContent({ collapsed = false, onNavigate, header }) {
   const { t } = useTranslation()
   const { ready, bump } = useDb()
-  const [collapsed, setCollapsed] = useState(false)
   const [creating, setCreating] = useState(false)
   const [name, setName] = useState('')
 
@@ -75,37 +98,15 @@ export default function Sidebar() {
   }
 
   return (
-    <aside
-      className={cn(
-        'sticky top-0 flex h-screen shrink-0 flex-col border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950',
-        collapsed ? 'w-14' : 'w-60'
-      )}
-    >
-      <div className={cn('flex items-center gap-2 px-3 py-3', collapsed && 'justify-center px-2')}>
-        {!collapsed && (
-          <Link to="/" className="font-semibold tracking-tight">
-            {t('app.title')}
-          </Link>
-        )}
-        <button
-          type="button"
-          onClick={() => setCollapsed((v) => !v)}
-          className={cn(
-            'rounded-md p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-100',
-            !collapsed && 'ml-auto'
-          )}
-          aria-label={collapsed ? t('nav.expand') : t('nav.collapse')}
-        >
-          {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-        </button>
-      </div>
+    <>
+      {header}
 
       <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-2 py-2">
-        <NavItem to="/" end icon={LayoutDashboard} label={t('nav.dashboard')} collapsed={collapsed} />
-        <NavItem to="/vespa" icon={Bike} label={t('nav.vespa')} collapsed={collapsed} />
-        <NavItem to="/tours" icon={MapIcon} label={t('nav.tours')} collapsed={collapsed} />
-        <NavItem to="/settings" icon={SettingsIcon} label={t('nav.settings')} collapsed={collapsed} />
-        <NavItem to="/import" icon={Upload} label={t('nav.import')} collapsed={collapsed} />
+        <NavItem to="/" end icon={LayoutDashboard} label={t('nav.dashboard')} collapsed={collapsed} onNavigate={onNavigate} />
+        <NavItem to="/tours" icon={MapIcon} label={t('nav.tours')} collapsed={collapsed} onNavigate={onNavigate} />
+        <NavItem to="/settings" icon={SettingsIcon} label={t('nav.settings')} collapsed={collapsed} onNavigate={onNavigate} />
+        <NavItem to="/import" icon={Upload} label={t('nav.import')} collapsed={collapsed} onNavigate={onNavigate} />
+        <NavItem to="/vespa" icon={Bike} label={t('nav.vespa')} collapsed={collapsed} onNavigate={onNavigate} />
 
         {!collapsed && (
           <div className="mt-4 flex items-center justify-between px-3">
@@ -149,6 +150,7 @@ export default function Sidebar() {
               <li key={c.id}>
                 <NavLink
                   to={`/tour/${c.id}`}
+                  onClick={onNavigate}
                   title={c.name}
                   className={({ isActive }) =>
                     cn(
@@ -170,12 +172,81 @@ export default function Sidebar() {
 
       <div
         className={cn(
-          'flex items-center border-t border-slate-200 px-3 py-3 dark:border-slate-800',
-          collapsed ? 'justify-center px-2' : 'justify-end'
+          'flex flex-col gap-2 border-t border-slate-200 px-3 py-3 dark:border-slate-800',
+          collapsed && 'items-center px-2'
         )}
       >
-        <LanguageToggle collapsed={collapsed} />
+        <div
+          className={cn(
+            'flex items-center gap-2',
+            collapsed ? 'flex-col' : 'justify-end'
+          )}
+        >
+          <ThemeToggle />
+          <LanguageToggle />
+        </div>
+        {!collapsed && (
+          <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-slate-500">
+            <NavLink
+              to="/impressum"
+              onClick={onNavigate}
+              className={({ isActive }) =>
+                cn(
+                  'hover:text-slate-900 dark:hover:text-slate-100',
+                  isActive && 'text-slate-900 dark:text-slate-100'
+                )
+              }
+            >
+              {t('nav.impressum')}
+            </NavLink>
+            <NavLink
+              to="/datenschutz"
+              onClick={onNavigate}
+              className={({ isActive }) =>
+                cn(
+                  'hover:text-slate-900 dark:hover:text-slate-100',
+                  isActive && 'text-slate-900 dark:text-slate-100'
+                )
+              }
+            >
+              {t('nav.datenschutz')}
+            </NavLink>
+          </div>
+        )}
       </div>
+    </>
+  )
+}
+
+export default function Sidebar() {
+  const { t } = useTranslation()
+  const [collapsed, setCollapsed] = useState(false)
+
+  const header = (
+    <div className={cn('flex items-center gap-2 px-3 py-3', collapsed && 'justify-center px-2')}>
+      {!collapsed && <Brand />}
+      <button
+        type="button"
+        onClick={() => setCollapsed((v) => !v)}
+        className={cn(
+          'rounded-md p-1.5 text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-100',
+          !collapsed && 'ml-auto'
+        )}
+        aria-label={collapsed ? t('nav.expand') : t('nav.collapse')}
+      >
+        {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
+      </button>
+    </div>
+  )
+
+  return (
+    <aside
+      className={cn(
+        'sticky top-0 hidden h-screen shrink-0 flex-col border-r border-slate-200 bg-white md:flex dark:border-slate-800 dark:bg-slate-950',
+        collapsed ? 'w-14' : 'w-60'
+      )}
+    >
+      <SidebarContent collapsed={collapsed} header={header} />
     </aside>
   )
 }
