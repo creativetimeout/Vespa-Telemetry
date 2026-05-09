@@ -43,6 +43,23 @@ npm run build    # production build into dist/
 npm run preview  # serve the production build locally
 ```
 
+## Translations and legal text
+
+UI strings live in `src/i18n/en.json` and `src/i18n/de.json`. They are bundled at build time, so adding or changing a key requires a rebuild. The active language is detected from the browser and cached in `localStorage`; the sidebar toggle switches it on the fly.
+
+Legal pages (Impressum, Datenschutz) are split out into separate files because they contain personal/hoster details that must not be committed:
+
+- `src/i18n/legal.en.json` and `src/i18n/legal.de.json` — committed templates filled with `[PLACEHOLDER]` strings.
+- `src/i18n/legal.en.local.json` and `src/i18n/legal.de.local.json` — **your private overrides**. These are gitignored (`*.local.json`) and only need to contain the keys you want to replace; the loader deep-merges them on top of the templates at startup.
+
+To deploy your own instance:
+
+1. Copy `legal.en.json` to `legal.en.local.json` (and the same for `de`).
+2. Replace every `[PLACEHOLDER]` with your real name, address, VAT statement, hoster details, supervisory authority, etc.
+3. Restart `npm run dev` (or rebuild) — Vite picks the new files up via `import.meta.glob` in `src/i18n/index.js`.
+
+If a local override is missing, the placeholder text is rendered verbatim, which makes missing entries obvious during review.
+
 ## Tech stack
 
 | Concern | Choice |
