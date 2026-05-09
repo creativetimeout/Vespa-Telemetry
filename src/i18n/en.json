@@ -1,180 +1,180 @@
 {
-  "app": {
-    "title": "Vespa Telemetry"
-  },
-  "nav": {
-    "dashboard": "Dashboard",
-    "import": "Import",
-    "vespa": "Vespa",
-    "settings": "Settings",
-    "tours": "Tours",
-    "collapse": "Collapse sidebar",
-    "expand": "Expand sidebar",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu",
-    "impressum": "Legal notice",
-    "datenschutz": "Privacy",
-    "darkMode": "Switch to dark mode",
-    "lightMode": "Switch to light mode"
-  },
-  "actions": {
-    "import": "Import file"
-  },
-  "charts": {
-    "speed": "Speed",
-    "elevation": "Elevation",
-    "rpm": "RPM",
-    "throttle": "Throttle",
-    "engineTemp": "Engine temp",
-    "battery": "Battery"
-  },
-  "pages": {
-    "dashboard": {
-      "title": "Dashboard",
-      "empty": "No data yet. Import your Vespa export to get started.",
-      "totals": "Totals",
-      "routes": "Routes",
-      "distance": "Distance",
-      "duration": "Duration",
-      "consumption": "Avg. consumption",
-      "recentDays": "Recent days"
-    },
-    "import": {
-      "title": "Import",
-      "drop": "Drop your Vespa export JSON file here, or click to choose",
-      "choose": "Choose file",
-      "stage": {
-        "reading": "Reading file…",
-        "decrypting": "Decrypting…",
-        "parsing": "Parsing…",
-        "compressing": "Compressing image…",
-        "inserting": "Saving to database…",
-        "done": "Done"
-      },
-      "summary": "{{added}} routes added, {{skipped}} skipped",
-      "error": "Import failed: {{message}}"
-    },
-    "day": {
-      "title": "Day {{date}}",
-      "exportGpx": "Export day GPX",
-      "routes": "Routes",
-      "noRoutes": "No routes on this day."
-    },
-    "route": {
-      "title": "Route",
-      "exportGpx": "Export GPX",
-      "telemetry": "Telemetry",
-      "stats": {
-        "maxSpeed": "Max speed",
-        "maxRpm": "Max RPM",
-        "fuel": "Fuel",
-        "tcInterventions": "TC interventions"
-      },
-      "notFound": "Route not found."
-    },
-    "vespa": {
-      "title": "Vespa",
-      "fields": {
-        "model": "Model",
-        "modelYear": "Model year",
-        "vin": "VIN",
-        "serial": "Serial",
-        "engineSize": "Engine size",
-        "totalMileage": "Total mileage",
-        "lastServiceDate": "Last service",
-        "lastServiceOdometer": "Last service mileage",
-        "batteryVoltage": "Battery"
-      }
-    },
-    "tours": {
-      "title": "Tours",
-      "newTour": "New tour",
-      "create": "Create",
-      "cancel": "Cancel",
-      "namePlaceholder": "Tour name",
-      "notesPlaceholder": "Notes (optional)",
-      "empty": "No tours yet. Create one and add trips from the Day or Route pages.",
-      "addToTour": "Add to tour",
-      "removeFromTour": "Remove",
-      "noneInTour": "No trips in this tour yet.",
-      "addTrips": "Add trips",
-      "delete": "Delete tour",
-      "rename": "Rename",
-      "save": "Save",
-      "confirmDelete": "Delete this tour? Trips themselves are kept.",
-      "exportGpx": "Export tour GPX",
-      "trips": "Trips",
-      "stats": "{{routes}} trips · {{distance}} · {{duration}}"
-    },
-    "settings": {
-      "title": "Settings",
-      "language": "Language",
-      "database": "Database",
-      "exportDb": "Export database",
-      "importDb": "Import database",
-      "clearDb": "Clear database",
-      "confirmClear": "Delete all imported data?",
-      "dbStatus": "{{routes}} routes, {{vehicles}} vehicles",
-      "importInvalid": "The selected file is not a valid SQLite database export."
-    },
-    "about": {
-      "title": "About this app",
-      "description": "Vespa Telemetry visualises the GPS routes and telemetry data exported from your Vespa app.\n\nAll processing happens in your browser — nothing is uploaded. Your imported data stays on this device.\n\nImport an export file from Settings → Import to get started."
-    },
-    "impressum": {
-      "title": "Legal notice",
-      "providerHeading": "Information pursuant to § 5 DDG (German Digital Services Act)",
-      "contactHeading": "Contact",
-      "emailLabel": "Email:",
-      "vatHeading": "VAT",
-      "responsibleHeading": "Responsible for content pursuant to § 18 (2) MStV",
-      "disclaimerHeading": "Disclaimer",
-      "contentLiabilityHeading": "Liability for content",
-      "contentLiabilityText": "The contents of these pages were created with the greatest possible care. However, no guarantee can be given for the accuracy, completeness, or topicality of the content. As a service provider we are responsible for our own content on these pages in accordance with the general laws (§ 7 (1) DDG). According to §§ 8 to 10 DDG, however, we are not obliged as a service provider to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information under general laws remain unaffected.",
-      "linkLiabilityHeading": "Liability for links",
-      "linkLiabilityText": "Our offer contains links to external websites of third parties, on whose contents we have no influence. Therefore, we cannot assume any liability for these external contents. The respective provider or operator of the linked pages is always responsible for their content. The linked pages were checked for possible legal violations at the time of linking. Illegal contents were not recognisable at the time of linking. Permanent monitoring of the content of the linked pages is, however, not reasonable without concrete indications of an infringement. If we become aware of any infringements, we will remove such links immediately.",
-      "copyrightHeading": "Copyright",
-      "copyrightText": "The content and works on these pages created by the site operator are subject to German copyright law. Duplication, processing, distribution, and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial use."
-    },
-    "datenschutz": {
-      "title": "Privacy policy",
-      "controller": {
-        "heading": "1. Controller"
-      },
-      "principle": {
-        "heading": "2. Principle",
-        "body": "This application runs entirely in your browser. Vespa export files you import are processed locally on your device and are never transmitted to a server."
-      },
-      "localStorage": {
-        "heading": "3. Local data storage on your device",
-        "body": "localStorage: the key i18nextLng stores your selected interface language. This is strictly necessary for operating the application and does not require consent (§ 25 (2) no. 2 TTDSG / § 25 (2) no. 2 TDDDG).\n\nIndexedDB: the imported Vespa data and derived information (routes, telemetry, tours) are stored exclusively on your device. You can delete this data at any time via Settings → Clear database, or by clearing site data in your browser."
-      },
-      "serverLogs": {
-        "heading": "4. Server log files (hosting)",
-        "body": "When you access this website, the web server automatically logs technical access data: IP address, date and time of the request, requested URL, referrer URL, and user agent string of the browser. This processing is based on Art. 6 (1) (f) GDPR (legitimate interest in the operation, stability, and security of the service). Log files are kept for a short period (typically up to 7 days) for security and troubleshooting purposes and are then deleted."
-      },
-      "processor": {
-        "heading": "5. Processor (hosting provider)"
-      },
-      "maps": {
-        "heading": "6. Maps / OpenStreetMap",
-        "body": "Map tiles are loaded from tile.openstreetmap.org, operated by the OpenStreetMap Foundation (United Kingdom). When map tiles are loaded, your IP address is transmitted to the OpenStreetMap Foundation. Legal basis: Art. 6 (1) (f) GDPR (legitimate interest in displaying maps). No tile is loaded until you open a page that contains a map. Details:"
-      },
-      "noTracking": {
-        "heading": "7. No cookies, no tracking, no analytics",
-        "body": "This application uses no cookies, no analytics, no third-party trackers, no advertising and no social-media plugins."
-      },
-      "noUpload": {
-        "heading": "8. Imported data is not transmitted",
-        "body": "Vespa export files and all data derived from them are processed only in your browser and are never uploaded to a server."
-      },
-      "rights": {
-        "heading": "9. Your rights (Art. 15–21 GDPR)",
-        "body": "You have the right to information (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20), and to object (Art. 21). To exercise these rights please contact us:"
-      },
-      "complaint": {
-        "heading": "10. Right to lodge a complaint"
-      }
-    }
-  }
+	"app": {
+		"title": "Vespa Telemetry"
+	},
+	"nav": {
+		"dashboard": "Dashboard",
+		"import": "Import",
+		"vespa": "Vespa",
+		"settings": "Settings",
+		"tours": "Tours",
+		"collapse": "Collapse sidebar",
+		"expand": "Expand sidebar",
+		"openMenu": "Open menu",
+		"closeMenu": "Close menu",
+		"impressum": "Legal notice",
+		"datenschutz": "Privacy",
+		"darkMode": "Switch to dark mode",
+		"lightMode": "Switch to light mode"
+	},
+	"actions": {
+		"import": "Import file"
+	},
+	"charts": {
+		"speed": "Speed",
+		"elevation": "Elevation",
+		"rpm": "RPM",
+		"throttle": "Throttle",
+		"engineTemp": "Engine temp",
+		"battery": "Battery"
+	},
+	"pages": {
+		"dashboard": {
+			"title": "Dashboard",
+			"empty": "No data yet. Import your Vespa export to get started.",
+			"totals": "Totals",
+			"routes": "Routes",
+			"distance": "Distance",
+			"duration": "Duration",
+			"consumption": "Avg. consumption",
+			"recentDays": "Recent days"
+		},
+		"import": {
+			"title": "Import",
+			"drop": "Drop your Vespa export JSON file here, or click to choose",
+			"choose": "Choose file",
+			"stage": {
+				"reading": "Reading file…",
+				"decrypting": "Decrypting…",
+				"parsing": "Parsing…",
+				"compressing": "Compressing image…",
+				"inserting": "Saving to database…",
+				"done": "Done"
+			},
+			"summary": "{{added}} routes added, {{skipped}} skipped",
+			"error": "Import failed: {{message}}"
+		},
+		"day": {
+			"title": "Day {{date}}",
+			"exportGpx": "Export day GPX",
+			"routes": "Routes",
+			"noRoutes": "No routes on this day."
+		},
+		"route": {
+			"title": "Route",
+			"exportGpx": "Export GPX",
+			"telemetry": "Telemetry",
+			"stats": {
+				"maxSpeed": "Max speed",
+				"maxRpm": "Max RPM",
+				"fuel": "Fuel",
+				"tcInterventions": "TC interventions"
+			},
+			"notFound": "Route not found."
+		},
+		"vespa": {
+			"title": "Vespa",
+			"fields": {
+				"model": "Model",
+				"modelYear": "Model year",
+				"vin": "VIN",
+				"serial": "Serial",
+				"engineSize": "Engine size",
+				"totalMileage": "Total mileage",
+				"lastServiceDate": "Last service",
+				"lastServiceOdometer": "Last service mileage",
+				"batteryVoltage": "Battery"
+			}
+		},
+		"tours": {
+			"title": "Tours",
+			"newTour": "New tour",
+			"create": "Create",
+			"cancel": "Cancel",
+			"namePlaceholder": "Tour name",
+			"notesPlaceholder": "Notes (optional)",
+			"empty": "No tours yet. Create one and add trips from the Day or Route pages.",
+			"addToTour": "Add to tour",
+			"removeFromTour": "Remove",
+			"noneInTour": "No trips in this tour yet.",
+			"addTrips": "Add trips",
+			"delete": "Delete tour",
+			"rename": "Rename",
+			"save": "Save",
+			"confirmDelete": "Delete this tour? Trips themselves are kept.",
+			"exportGpx": "Export tour GPX",
+			"trips": "Trips",
+			"stats": "{{routes}} trips · {{distance}} · {{duration}}"
+		},
+		"settings": {
+			"title": "Settings",
+			"language": "Language",
+			"database": "Database",
+			"exportDb": "Export database",
+			"importDb": "Import database",
+			"clearDb": "Clear database",
+			"confirmClear": "Delete all imported data?",
+			"dbStatus": "{{routes}} routes, {{vehicles}} vehicles",
+			"importInvalid": "The selected file is not a valid SQLite database export."
+		},
+		"about": {
+			"title": "About this app",
+			"description": "Vespa Telemetry visualises the GPS routes and telemetry data exported from your Vespa app.\n\nAll processing happens in your browser — nothing is uploaded. Your imported data stays on this device.\n\nImport an export file from Settings → Import to get started."
+		},
+		"impressum": {
+			"title": "Legal notice",
+			"providerHeading": "Information pursuant to § 5 DDG (German Digital Services Act)",
+			"contactHeading": "Contact",
+			"emailLabel": "Email:",
+			"vatHeading": "VAT",
+			"responsibleHeading": "Responsible for content pursuant to § 18 (2) MStV",
+			"disclaimerHeading": "Disclaimer",
+			"contentLiabilityHeading": "Liability for content",
+			"contentLiabilityText": "The contents of these pages were created with the greatest possible care. However, no guarantee can be given for the accuracy, completeness, or topicality of the content. As a service provider we are responsible for our own content on these pages in accordance with the general laws (§ 7 (1) DDG). According to §§ 8 to 10 DDG, however, we are not obliged as a service provider to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information under general laws remain unaffected.",
+			"linkLiabilityHeading": "Liability for links",
+			"linkLiabilityText": "Our offer contains links to external websites of third parties, on whose contents we have no influence. Therefore, we cannot assume any liability for these external contents. The respective provider or operator of the linked pages is always responsible for their content. The linked pages were checked for possible legal violations at the time of linking. Illegal contents were not recognisable at the time of linking. Permanent monitoring of the content of the linked pages is, however, not reasonable without concrete indications of an infringement. If we become aware of any infringements, we will remove such links immediately.",
+			"copyrightHeading": "Copyright",
+			"copyrightText": "The content and works on these pages created by the site operator are subject to German copyright law. Duplication, processing, distribution, and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial use."
+		},
+		"datenschutz": {
+			"title": "Privacy policy",
+			"controller": {
+				"heading": "1. Controller"
+			},
+			"principle": {
+				"heading": "2. Principle",
+				"body": "This application runs entirely in your browser. Vespa export files you import are processed locally on your device and are never transmitted to a server."
+			},
+			"localStorage": {
+				"heading": "3. Local data storage on your device",
+				"body": "localStorage: the key i18nextLng stores your selected interface language. This is strictly necessary for operating the application and does not require consent (§ 25 (2) no. 2 TTDSG / § 25 (2) no. 2 TDDDG).\n\nIndexedDB: the imported Vespa data and derived information (routes, telemetry, tours) are stored exclusively on your device. You can delete this data at any time via Settings → Clear database, or by clearing site data in your browser."
+			},
+			"serverLogs": {
+				"heading": "4. Server log files (hosting)",
+				"body": "When you access this website, the web server automatically logs technical access data: IP address, date and time of the request, requested URL, referrer URL, and user agent string of the browser. This processing is based on Art. 6 (1) (f) GDPR (legitimate interest in the operation, stability, and security of the service). Log files are kept for a short period (typically up to 7 days) for security and troubleshooting purposes and are then deleted."
+			},
+			"processor": {
+				"heading": "5. Processor (hosting provider)"
+			},
+			"maps": {
+				"heading": "6. Maps / OpenStreetMap",
+				"body": "Map tiles are loaded from tile.openstreetmap.org, operated by the OpenStreetMap Foundation (United Kingdom). When map tiles are loaded, your IP address is transmitted to the OpenStreetMap Foundation. Legal basis: Art. 6 (1) (f) GDPR (legitimate interest in displaying maps). No tile is loaded until you open a page that contains a map. Details:"
+			},
+			"noTracking": {
+				"heading": "7. Apart from the data in section 3, no cookies, no tracking, no analytics",
+				"body": "This application uses no cookies, no analytics, no third-party trackers, no advertising and no social-media plugins."
+			},
+			"noUpload": {
+				"heading": "8. Imported data is not transmitted",
+				"body": "Vespa export files and all data derived from them are processed only in your browser and are never uploaded to a server."
+			},
+			"rights": {
+				"heading": "9. Your rights (Art. 15–21 GDPR)",
+				"body": "You have the right to information (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20), and to object (Art. 21). To exercise these rights please contact us:"
+			},
+			"complaint": {
+				"heading": "10. Right to lodge a complaint"
+			}
+		}
+	}
 }
