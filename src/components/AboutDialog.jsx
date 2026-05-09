@@ -51,7 +51,7 @@ export default function AboutDialog({ open, onClose }) {
           />
           <h2
             id="about-title"
-            className="mt-4 bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-500 bg-clip-text text-2xl font-bold tracking-tight text-transparent"
+            className="mt-4 bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 bg-clip-text text-2xl font-bold tracking-tight text-transparent"
           >
             {t('app.title')}
           </h2>

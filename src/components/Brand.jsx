@@ -14,7 +14,7 @@ export default function Brand({ className }) {
         onClick={() => setAboutOpen(true)}
         aria-label={t('pages.about.title')}
         className={cn(
-          'min-w-0 truncate bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-amber-500 bg-clip-text text-lg font-bold tracking-tight text-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
+          'min-w-0 truncate bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 bg-clip-text text-lg font-bold tracking-tight text-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500',
           className
         )}
       >
