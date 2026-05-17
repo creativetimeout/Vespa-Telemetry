@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useDb, useDbQuery } from '@/lib/db/DbProvider'
@@ -23,6 +23,9 @@ export default function RoutePage() {
   const { t, i18n } = useTranslation()
   const locale = i18n.resolvedLanguage
   const { ready } = useDb()
+  const [cursor, setCursor] = useState(null)
+  const [range, setRange] = useState(null)
+  const [zoomRange, setZoomRange] = useState(null)
 
   const routeQ = useDbQuery(() => getRoute(id), [id])
   const pointsQ = useDbQuery(() => getRoutePoints(id), [id])
@@ -105,7 +108,7 @@ export default function RoutePage() {
         </div>
       </div>
 
-      <MapView tracks={tracks} height={420} />
+      <MapView tracks={tracks} rawPoints={points} cursor={cursor} range={range} zoomRange={zoomRange} height={420} />
 
       <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <Stat label={t('pages.route.stats.maxSpeed')} value={`${stats.maxSpeed.toFixed(1)} km/h`} />
@@ -129,7 +132,16 @@ export default function RoutePage() {
           {t('pages.route.telemetry')}
         </h2>
         {telemetry.length > 0 || points.length > 0 ? (
-          <TelemetryCharts telemetry={telemetry} points={points} />
+          <TelemetryCharts
+            telemetry={telemetry}
+            points={points}
+            cursor={cursor}
+            range={range}
+            zoomRange={zoomRange}
+            onCursorChange={setCursor}
+            onRangeChange={setRange}
+            onZoomChange={setZoomRange}
+          />
         ) : null}
       </section>
     </div>

@@ -158,6 +158,9 @@ export default function TourDetail() {
   const [showAdd, setShowAdd] = useState(false)
   const [editing, setEditing] = useState(false)
   const [editName, setEditName] = useState('')
+  const [cursor, setCursor] = useState(null)
+  const [range, setRange] = useState(null)
+  const [zoomRange, setZoomRange] = useState(null)
 
   if (!ready) return null
   if (tourQ.data === null) {
@@ -285,7 +288,7 @@ export default function TourDetail() {
         <p className="text-slate-500">{t('pages.tours.noneInTour')}</p>
       ) : (
         <>
-          <MapView tracks={tracks} height={420} />
+          <MapView tracks={tracks} rawPoints={allPoints} cursor={cursor} range={range} zoomRange={zoomRange} height={420} />
 
           <section className="space-y-2">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
@@ -333,7 +336,16 @@ export default function TourDetail() {
               <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
                 {t('pages.route.telemetry')}
               </h2>
-              <TelemetryCharts telemetry={allTelemetry} points={allPoints} />
+              <TelemetryCharts
+                telemetry={allTelemetry}
+                points={allPoints}
+                cursor={cursor}
+                range={range}
+                zoomRange={zoomRange}
+                onCursorChange={setCursor}
+                onRangeChange={setRange}
+                onZoomChange={setZoomRange}
+              />
             </section>
           ) : null}
         </>

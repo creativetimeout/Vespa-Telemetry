@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useDb, useDbQuery } from '@/lib/db/DbProvider'
@@ -19,6 +19,9 @@ export default function Day() {
   const { t, i18n } = useTranslation()
   const locale = i18n.resolvedLanguage
   const { ready } = useDb()
+  const [cursor, setCursor] = useState(null)
+  const [range, setRange] = useState(null)
+  const [zoomRange, setZoomRange] = useState(null)
 
   const routesQ = useDbQuery(() => getRoutesForDay(date), [date])
   const routes = routesQ.data ?? []
@@ -108,7 +111,7 @@ export default function Day() {
         <p className="text-slate-500">{t('pages.day.noRoutes')}</p>
       ) : (
         <>
-          <MapView tracks={tracks} height={420} />
+          <MapView tracks={tracks} rawPoints={allPoints} cursor={cursor} range={range} zoomRange={zoomRange} height={420} />
 
           <section className="space-y-2">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
@@ -144,7 +147,16 @@ export default function Day() {
               <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
                 {t('pages.route.telemetry')}
               </h2>
-              <TelemetryCharts telemetry={allTelemetry} points={allPoints} />
+              <TelemetryCharts
+                telemetry={allTelemetry}
+                points={allPoints}
+                cursor={cursor}
+                range={range}
+                zoomRange={zoomRange}
+                onCursorChange={setCursor}
+                onRangeChange={setRange}
+                onZoomChange={setZoomRange}
+              />
             </section>
           ) : null}
         </>
