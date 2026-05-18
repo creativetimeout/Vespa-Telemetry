@@ -148,7 +148,7 @@ function Chart({
 							<ReferenceArea
 								x1={range[0]}
 								x2={range[1]}
-								fill="white"
+								fill="currentColor"
 								fillOpacity={0.12}
 								strokeOpacity={0}
 							/>
