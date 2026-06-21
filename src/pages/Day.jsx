@@ -8,6 +8,7 @@ import { buildGpx, downloadGpx } from '@/lib/gpx'
 import MapView, { TRACK_COLORS } from '@/components/MapView'
 import TelemetryCharts from '@/components/TelemetryCharts'
 import AddToCollectionMenu from '@/components/AddToCollectionMenu'
+import Stat from '@/components/Stat'
 
 function timeOnly(ms, locale) {
   if (!Number.isFinite(ms)) return '—'
@@ -86,17 +87,9 @@ export default function Day() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">
-            {dayDate ? formatDateLocal(dayDate, locale) : t('pages.day.title', { date })}
-          </h1>
-          <p className="text-sm text-slate-500 tabular-nums">
-            {routes.length} · {formatKm(totals.distance, locale)} · {formatDuration(totals.duration)}
-            {totals.distance > 0 && totals.liters > 0
-              ? ` · ${formatLper100km(totals.distance / totals.liters, locale)}`
-              : ''}
-          </p>
-        </div>
+        <h1 className="text-2xl font-semibold tracking-tight">
+          {dayDate ? formatDateLocal(dayDate, locale) : t('pages.day.title', { date })}
+        </h1>
         <button
           type="button"
           onClick={onExportDay}
@@ -106,6 +99,21 @@ export default function Day() {
           {t('pages.day.exportGpx')}
         </button>
       </div>
+
+      {routes.length > 0 && (
+        <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
+          <Stat label={t('pages.dashboard.routes')} value={routes.length} />
+          <Stat label={t('pages.dashboard.distance')} value={formatKm(totals.distance, locale)} />
+          <Stat label={t('pages.dashboard.duration')} value={formatDuration(totals.duration)} />
+          <Stat
+            label={t('pages.dashboard.consumption')}
+            value={formatLper100km(
+              totals.distance > 0 && totals.liters > 0 ? totals.distance / totals.liters : NaN,
+              locale
+            )}
+          />
+        </section>
+      )}
 
       {routes.length === 0 ? (
         <p className="text-slate-500">{t('pages.day.noRoutes')}</p>

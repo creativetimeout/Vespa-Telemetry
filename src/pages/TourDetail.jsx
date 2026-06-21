@@ -23,6 +23,7 @@ import {
 import { buildGpx, downloadGpx } from '@/lib/gpx'
 import MapView, { TRACK_COLORS } from '@/components/MapView'
 import TelemetryCharts from '@/components/TelemetryCharts'
+import Stat from '@/components/Stat'
 
 function timeOnly(ms, locale) {
   if (!Number.isFinite(ms)) return '—'
@@ -243,11 +244,6 @@ export default function TourDetail() {
               {tour.name}
             </h1>
           )}
-          <p className="text-sm text-slate-500 tabular-nums">
-            {tour.route_count} · {formatKm(tour.total_distance_km, locale)} ·{' '}
-            {formatDuration(tour.total_duration_s)}
-            {consumption ? ` · ${consumption}` : ''}
-          </p>
           {tour.notes && <p className="mt-1 text-sm text-slate-500">{tour.notes}</p>}
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -288,6 +284,16 @@ export default function TourDetail() {
         <p className="text-slate-500">{t('pages.tours.noneInTour')}</p>
       ) : (
         <>
+          <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
+            <Stat label={t('pages.dashboard.routes')} value={tour.route_count} />
+            <Stat label={t('pages.dashboard.distance')} value={formatKm(tour.total_distance_km, locale)} />
+            <Stat label={t('pages.dashboard.duration')} value={formatDuration(tour.total_duration_s)} />
+            <Stat
+              label={t('pages.dashboard.consumption')}
+              value={consumption ?? formatLper100km(NaN, locale)}
+            />
+          </section>
+
           <MapView tracks={tracks} rawPoints={allPoints} cursor={cursor} range={range} zoomRange={zoomRange} height={420} />
 
           <section className="space-y-2">
