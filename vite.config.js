@@ -11,7 +11,7 @@ function requireLegalOverrides() {
     name: 'require-legal-overrides',
     apply: 'build',
     buildStart() {
-      const dir = path.resolve(__dirname, 'src/i18n')
+      const dir = path.resolve(import.meta.dirname, 'src/i18n')
       for (const lng of ['en', 'de']) {
         const file = path.join(dir, `legal.${lng}.local.json`)
         if (!fs.existsSync(file)) {
@@ -29,7 +29,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss(), requireLegalOverrides()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(import.meta.dirname, './src'),
     },
   },
   build: {
