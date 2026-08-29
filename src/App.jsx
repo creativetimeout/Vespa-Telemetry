@@ -10,6 +10,7 @@ const Import = lazy(() => import('./pages/Import'))
 const Day = lazy(() => import('./pages/Day'))
 const RouteDetail = lazy(() => import('./pages/Route'))
 const Vespa = lazy(() => import('./pages/Vespa'))
+const HeatMap = lazy(() => import('./pages/HeatMap'))
 const Tours = lazy(() => import('./pages/Tours'))
 const TourDetail = lazy(() => import('./pages/TourDetail'))
 const Impressum = lazy(() => import('./pages/Impressum'))
@@ -31,6 +32,7 @@ export default function App() {
               <Route path="/day/:date" element={<Day />} />
               <Route path="/route/:id" element={<RouteDetail />} />
               <Route path="/vespa" element={<Vespa />} />
+              <Route path="/heatmap" element={<HeatMap />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/tours" element={<Tours />} />
               <Route path="/tour/:id" element={<TourDetail />} />

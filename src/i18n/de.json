@@ -8,6 +8,7 @@
 		"vespa": "Vespa",
 		"settings": "Einstellungen",
 		"tours": "Touren",
+		"heatMap": "Heatmap",
 		"collapse": "Seitenleiste einklappen",
 		"expand": "Seitenleiste ausklappen",
 		"openMenu": "Menü öffnen",
@@ -87,6 +88,14 @@
 				"lastServiceOdometer": "Letzter Service km-Stand",
 				"batteryVoltage": "Batterie"
 			}
+		},
+		"heatMap": {
+			"title": "Heatmap",
+			"empty": "Noch keine GPS-Punkte erfasst.",
+			"legendFew": "wenige Punkte",
+			"legendMany": "viele Punkte",
+			"pointsNearby": "{{count}} GPS-Punkt in der Nähe",
+			"pointsNearby_other": "{{count}} GPS-Punkte in der Nähe"
 		},
 		"tours": {
 			"title": "Touren",

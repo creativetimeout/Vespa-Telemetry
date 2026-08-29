@@ -71,6 +71,14 @@ export function getLastImport() {
   )
 }
 
+// ---------- Heat Map ----------
+
+export function getAllRoutePoints() {
+  return all(
+    'SELECT route_id, seq, ts_ms, lat, lng, alt FROM route_point WHERE lat IS NOT NULL AND lng IS NOT NULL'
+  )
+}
+
 // ---------- Tour collections ----------
 
 export function getCollections() {

@@ -8,6 +8,7 @@ import {
   Bike,
   Settings as SettingsIcon,
   Map as MapIcon,
+  Flame,
   ChevronLeft,
   ChevronRight,
   Plus,
@@ -104,6 +105,7 @@ export function SidebarContent({ collapsed = false, onNavigate, header }) {
       <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-2 py-2">
         <NavItem to="/" end icon={LayoutDashboard} label={t('nav.dashboard')} collapsed={collapsed} onNavigate={onNavigate} />
         <NavItem to="/tours" icon={MapIcon} label={t('nav.tours')} collapsed={collapsed} onNavigate={onNavigate} />
+        <NavItem to="/heatmap" icon={Flame} label={t('nav.heatMap')} collapsed={collapsed} onNavigate={onNavigate} />
         <NavItem to="/settings" icon={SettingsIcon} label={t('nav.settings')} collapsed={collapsed} onNavigate={onNavigate} />
         <NavItem to="/import" icon={Upload} label={t('nav.import')} collapsed={collapsed} onNavigate={onNavigate} />
         <NavItem to="/vespa" icon={Bike} label={t('nav.vespa')} collapsed={collapsed} onNavigate={onNavigate} />
