@@ -1,26 +1,37 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MapContainer, TileLayer, Popup, useMap, useMapEvents } from 'react-leaflet'
 import { useDb, useDbQuery } from '@/lib/db/DbProvider'
 import { getAllRoutePoints } from '@/lib/db/queries'
+import { buildHeatCells } from '@/lib/heatgrid'
+import {
+  CELL_SIZE_OPTIONS_M,
+  WINDOW_OPTIONS_MINUTES,
+  getStoredCellSizeM,
+  getStoredWindowMinutes,
+  setStoredCellSizeM,
+  setStoredWindowMinutes,
+} from '@/lib/heatSettings'
 import HeatLayer from '@/components/HeatLayer'
 import HeatMapLegend from '@/components/HeatMapLegend'
 
 const CLICK_RADIUS_PX = 15
 
-function FitAllPoints({ points }) {
+function FitAllPoints({ cells }) {
   const map = useMap()
+  const fitted = useRef(false)
   useEffect(() => {
-    if (!points || points.length === 0) return
+    if (fitted.current || !cells || cells.length === 0) return
+    fitted.current = true
     map.fitBounds(
-      points.map((p) => [p.lat, p.lng]),
+      cells.map((c) => [c.lat, c.lng]),
       { padding: [24, 24] }
     )
-  }, [map, points])
+  }, [map, cells])
   return null
 }
 
-function ClickInfo({ points }) {
+function ClickInfo({ cells }) {
   const { t } = useTranslation()
   const [popup, setPopup] = useState(null)
 
@@ -28,9 +39,9 @@ function ClickInfo({ points }) {
     click(e) {
       const clickPt = map.latLngToContainerPoint(e.latlng)
       let count = 0
-      for (const p of points) {
-        const pt = map.latLngToContainerPoint([p.lat, p.lng])
-        if (pt.distanceTo(clickPt) <= CLICK_RADIUS_PX) count++
+      for (const c of cells) {
+        const pt = map.latLngToContainerPoint([c.lat, c.lng])
+        if (pt.distanceTo(clickPt) <= CLICK_RADIUS_PX) count += c.count
       }
       setPopup(count > 0 ? { latlng: e.latlng, count } : null)
     },
@@ -50,14 +61,64 @@ export default function HeatMap() {
   const { ready } = useDb()
   const { data: points } = useDbQuery(getAllRoutePoints)
 
-  const hasPoints = useMemo(() => points && points.length > 0, [points])
+  const [cellSizeM, setCellSizeM] = useState(() => getStoredCellSizeM())
+  const [windowMinutes, setWindowMinutes] = useState(() => getStoredWindowMinutes())
+
+  function handleCellSizeChange(e) {
+    const value = Number(e.target.value)
+    setCellSizeM(value)
+    setStoredCellSizeM(value)
+  }
+
+  function handleWindowChange(e) {
+    const value = Number(e.target.value)
+    setWindowMinutes(value)
+    setStoredWindowMinutes(value)
+  }
+
+  const cells = useMemo(() => {
+    if (!points || points.length === 0) return []
+    return buildHeatCells(points, { cellSizeM, windowMs: windowMinutes * 60_000 })
+  }, [points, cellSizeM, windowMinutes])
+
+  const hasCells = useMemo(() => cells && cells.length > 0, [cells])
 
   if (!ready) return null
 
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold tracking-tight">{t('pages.heatMap.title')}</h1>
-      {!hasPoints ? (
+      <div className="flex flex-wrap gap-4">
+        <label className="flex items-center gap-2 text-sm">
+          <span className="text-slate-500">{t('pages.heatMap.cellSizeLabel')}</span>
+          <select
+            value={cellSizeM}
+            onChange={handleCellSizeChange}
+            className="rounded-md border border-slate-300 bg-white px-2 py-1 text-sm dark:border-slate-700 dark:bg-slate-900"
+          >
+            {CELL_SIZE_OPTIONS_M.map((v) => (
+              <option key={v} value={v}>
+                {v} m
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="flex items-center gap-2 text-sm">
+          <span className="text-slate-500">{t('pages.heatMap.windowLabel')}</span>
+          <select
+            value={windowMinutes}
+            onChange={handleWindowChange}
+            className="rounded-md border border-slate-300 bg-white px-2 py-1 text-sm dark:border-slate-700 dark:bg-slate-900"
+          >
+            {WINDOW_OPTIONS_MINUTES.map((v) => (
+              <option key={v} value={v}>
+                {v} min
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      {!hasCells ? (
         <p className="text-slate-500">{t('pages.heatMap.empty')}</p>
       ) : (
         <div
@@ -69,9 +130,9 @@ export default function HeatMap() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <HeatLayer points={points} />
-            <ClickInfo points={points} />
-            <FitAllPoints points={points} />
+            <HeatLayer cells={cells} />
+            <ClickInfo cells={cells} />
+            <FitAllPoints cells={cells} />
           </MapContainer>
           <HeatMapLegend />
         </div>

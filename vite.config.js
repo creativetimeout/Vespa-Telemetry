@@ -35,4 +35,8 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 1500,
   },
+  test: {
+    environment: 'happy-dom',
+    include: ['src/**/*.test.js'],
+  },
 })

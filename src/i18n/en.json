@@ -92,10 +92,12 @@
 		"heatMap": {
 			"title": "Heat Map",
 			"empty": "No GPS points recorded yet.",
-			"legendFew": "few points",
-			"legendMany": "many points",
-			"pointsNearby": "{{count}} GPS point nearby",
-			"pointsNearby_other": "{{count}} GPS points nearby"
+			"legendFew": "few visits",
+			"legendMany": "many visits",
+			"pointsNearby": "{{count}} visit at this spot",
+			"pointsNearby_other": "{{count}} visits at this spot",
+			"cellSizeLabel": "Cell size",
+			"windowLabel": "Time window"
 		},
 		"tours": {
 			"title": "Tours",
@@ -158,7 +160,7 @@
 			},
 			"localStorage": {
 				"heading": "3. Local data storage on your device",
-				"body": "localStorage: the key i18nextLng stores your selected interface language. This is strictly necessary for operating the application and does not require consent (§ 25 (2) no. 2 TTDSG / § 25 (2) no. 2 TDDDG).\n\nIndexedDB: the imported Vespa data and derived information (routes, telemetry, tours) are stored exclusively on your device. You can delete this data at any time via Settings → Clear database, or by clearing site data in your browser."
+				"body": "localStorage: the key i18nextLng stores your selected interface language, and the keys vespa.heatmap.cellSizeM / vespa.heatmap.windowMinutes store your chosen Heat Map display settings. This is strictly necessary for operating the application and does not require consent (§ 25 (2) no. 2 TTDSG / § 25 (2) no. 2 TDDDG).\n\nIndexedDB: the imported Vespa data and derived information (routes, telemetry, tours) are stored exclusively on your device. You can delete this data at any time via Settings → Clear database, or by clearing site data in your browser."
 			},
 			"serverLogs": {
 				"heading": "4. Server log files (hosting)",
