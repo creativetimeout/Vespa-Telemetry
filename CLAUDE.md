@@ -9,6 +9,7 @@ npm run dev       # dev server at http://localhost:5173/
 npm run build     # production build into dist/
 npm run preview   # serve the production build locally
 npm run lint      # ESLint
+npm run test      # Vitest unit tests
 ```
 
 Requires Node ≥ 20.19 (or ≥ 22.12).

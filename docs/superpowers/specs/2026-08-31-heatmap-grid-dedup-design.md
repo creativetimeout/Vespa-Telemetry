@@ -102,16 +102,22 @@ das absichtlich so behandeln und nicht aus Versehen den Timer bei jedem Punkt zu
 
 ### Farbskala
 
-`L.heatLayer` normalisiert Gewichte bereits intern relativ zum Maximum aller übergebenen Punkte
-(kein `max`-Override nötig). Es reicht, `count` statt der bisherigen konstanten `1` als drittes
-Element in den Punkt-Arrays zu übergeben:
+`L.heatLayer` normalisiert Gewichte **nicht** automatisch relativ zum Maximum aller übergebenen
+Punkte. Ohne explizite `max`-Option setzt die Bibliothek `max` intern auf `1`, und die Intensität
+wird zusätzlich mit einem zoomabhängigen Faktor skaliert, der bei `maxZoom` auf volle Intensität
+clamped — bei typischen Zoomstufen dominiert dieser Faktor die Darstellung, nicht die tatsächliche
+Besuchsanzahl pro Zelle. `count` statt der bisherigen konstanten `1` als drittes Element der
+Punkt-Arrays zu übergeben, reicht also allein nicht aus:
 
 ```js
 const heatPoints = cells.map((c) => [c.lat, c.lng, c.count])
 ```
 
-Damit ist die Kalibrierung "rot = meistbesuchte Zelle(n) im aktuellen Datensatz" praktisch
-kostenlos vorhanden — keine zusätzliche Normalisierungslogik nötig.
+Die `max`-Option wird deshalb explizit gesetzt, berechnet als 95. Perzentil der
+Zellen-Besuchszahlen (mit einer Untergrenze von 1, um Division durch Null bei sehr kleinen
+Datensätzen zu vermeiden). Das 95. Perzentil statt des rohen Maximums verhindert, dass eine
+einzelne extrem häufig besuchte Zelle (z. B. Garage/Zuhause) die Skala für alle anderen Zellen
+Richtung Null staucht.
 
 ## UI-Änderungen
 

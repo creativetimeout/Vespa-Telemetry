@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { MapContainer, TileLayer, Popup, useMap, useMapEvents } from 'react-leaflet'
 import { useDb, useDbQuery } from '@/lib/db/DbProvider'
@@ -19,8 +19,10 @@ const CLICK_RADIUS_PX = 15
 
 function FitAllPoints({ cells }) {
   const map = useMap()
+  const fitted = useRef(false)
   useEffect(() => {
-    if (!cells || cells.length === 0) return
+    if (fitted.current || !cells || cells.length === 0) return
+    fitted.current = true
     map.fitBounds(
       cells.map((c) => [c.lat, c.lng]),
       { padding: [24, 24] }
