@@ -885,6 +885,35 @@
 
     {
       "type": "rectangle",
+      "id": "page_heatmap",
+      "x": 910, "y": 1110, "width": 150, "height": 50,
+      "strokeColor": "#1e3a5f", "backgroundColor": "#dbeafe",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410050, "version": 1, "versionNonce": 410051,
+      "isDeleted": false, "groupIds": [],
+      "boundElements": [{"id": "page_heatmap_t", "type": "text"}],
+      "link": null, "locked": false, "roundness": {"type": 3}
+    },
+    {
+      "type": "text",
+      "id": "page_heatmap_t",
+      "x": 920, "y": 1118,
+      "width": 130, "height": 35,
+      "text": "/heatmap\nHeatMap",
+      "originalText": "/heatmap\nHeatMap",
+      "fontSize": 13, "fontFamily": 3,
+      "textAlign": "center", "verticalAlign": "middle",
+      "strokeColor": "#1e40af", "backgroundColor": "transparent",
+      "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
+      "roughness": 0, "opacity": 100, "angle": 0,
+      "seed": 410052, "version": 1, "versionNonce": 410053,
+      "isDeleted": false, "groupIds": [], "boundElements": null,
+      "link": null, "locked": false, "containerId": "page_heatmap", "lineHeight": 1.25
+    },
+
+    {
+      "type": "rectangle",
       "id": "page_vespa",
       "x": 60, "y": 1180, "width": 150, "height": 50,
       "strokeColor": "#1e3a5f", "backgroundColor": "#dbeafe",
@@ -1043,14 +1072,14 @@
     {
       "type": "line",
       "id": "router_fan_h",
-      "x": 135, "y": 1100, "width": 680, "height": 0,
+      "x": 135, "y": 1100, "width": 850, "height": 0,
       "strokeColor": "#1e3a5f", "backgroundColor": "transparent",
       "fillStyle": "solid", "strokeWidth": 1, "strokeStyle": "solid",
       "roughness": 0, "opacity": 100, "angle": 0,
       "seed": 430003, "version": 1, "versionNonce": 430004,
       "isDeleted": false, "groupIds": [], "boundElements": null,
       "link": null, "locked": false,
-      "points": [[0, 0], [680, 0]]
+      "points": [[0, 0], [850, 0]]
     },
 
     {
