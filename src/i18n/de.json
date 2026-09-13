@@ -132,6 +132,7 @@
 		},
 		"about": {
 			"title": "Über diese App",
+			"version": "Version {{version}}",
 			"description": "Vespa Telemetrie visualisiert die GPS-Routen und Telemetriedaten aus dem Export deiner Vespa-App.\n\nDie gesamte Verarbeitung findet in deinem Browser statt – nichts wird hochgeladen. Deine importierten Daten bleiben auf diesem Gerät.\n\nImportiere eine Exportdatei über Einstellungen → Import, um zu starten."
 		},
 		"impressum": {
