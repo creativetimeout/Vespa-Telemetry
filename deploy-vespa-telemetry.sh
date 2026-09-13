@@ -16,7 +16,7 @@ echo "==> Pulling latest code"
 git -C "$REPO_DIR" pull
 
 echo "==> Building ${NEW_IMAGE}"
-docker build -t "$NEW_IMAGE" "$REPO_DIR"
+docker build --build-arg VITE_APP_VERSION="$NEXT_VERSION" -t "$NEW_IMAGE" "$REPO_DIR"
 
 echo "==> Updating docker-compose.yml (${CURRENT} -> ${NEXT_VERSION})"
 sed -i "s|${IMAGE_NAME}:${CURRENT}|${NEW_IMAGE}|" "$COMPOSE_FILE"

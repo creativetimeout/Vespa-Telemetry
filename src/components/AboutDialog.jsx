@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
 import { X } from 'lucide-react'
 
+const APP_VERSION = import.meta.env.VITE_APP_VERSION || 'dev'
+
 export default function AboutDialog({ open, onClose }) {
   const { t } = useTranslation()
 
@@ -55,6 +57,9 @@ export default function AboutDialog({ open, onClose }) {
           >
             {t('app.title')}
           </h2>
+          <p className="mt-1 font-mono text-xs text-slate-500 dark:text-slate-400">
+            {t('pages.about.version', { version: APP_VERSION })}
+          </p>
           <p className="mt-3 whitespace-pre-line text-sm text-slate-600 dark:text-slate-400">
             {t('pages.about.description')}
           </p>
