@@ -13,7 +13,15 @@ NEXT_VERSION="${MAJOR}.$((MINOR + 1))"
 NEW_IMAGE="${IMAGE_NAME}:${NEXT_VERSION}"
 
 echo "==> Pulling latest code"
+BEFORE_PULL=$(git -C "$REPO_DIR" rev-parse HEAD)
 git -C "$REPO_DIR" pull
+
+# Bash keeps running the old copy of this file after the pull replaces it,
+# so restart once if the pull changed the script.
+if [ -z "$DEPLOY_RESTARTED" ] && ! git -C "$REPO_DIR" diff --quiet "$BEFORE_PULL" HEAD -- deploy-vespa-telemetry.sh; then
+  echo "==> Deploy script changed, restarting with the new version"
+  DEPLOY_RESTARTED=1 exec bash "$REPO_DIR/deploy-vespa-telemetry.sh" "$@"
+fi
 
 echo "==> Building ${NEW_IMAGE}"
 docker build --build-arg VITE_APP_VERSION="$NEXT_VERSION" -t "$NEW_IMAGE" "$REPO_DIR"
