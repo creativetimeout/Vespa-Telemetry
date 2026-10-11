@@ -42,6 +42,9 @@ export default function Settings() {
       }
       await replaceWithBytes(buf)
       bump()
+    } catch (err) {
+      console.error(err)
+      alert(t('pages.settings.importInvalid'))
     } finally {
       setBusy(false)
     }
