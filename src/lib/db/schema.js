@@ -136,6 +136,35 @@ function setSchemaVersion(db, version) {
   )
 }
 
+// Objects the app's queries rely on. A restored backup must contain all of
+// them — schema_version alone can't be trusted, it lives in the file.
+const REQUIRED_OBJECTS = [
+  'meta',
+  'import_log',
+  'vehicle',
+  'route',
+  'route_point',
+  'route_telemetry',
+  'day_summary',
+  'tour_collection',
+  'tour_collection_route',
+]
+
+// Throws if `db` (already migrated) isn't a usable Vespa database.
+export function validateSchema(db) {
+  const check = db.exec('PRAGMA quick_check')
+  if (check[0]?.values[0]?.[0] !== 'ok') throw new Error('Database file is corrupt')
+
+  const res = db.exec('SELECT type, name FROM sqlite_master')
+  const rows = res[0]?.values ?? []
+  const names = new Set(rows.map(([, name]) => name))
+  const missing = REQUIRED_OBJECTS.filter((n) => !names.has(n))
+  if (missing.length) throw new Error(`Database is missing: ${missing.join(', ')}`)
+  // The app never creates triggers; one in an imported file could silently
+  // rewrite or delete data on later writes.
+  if (rows.some(([type]) => type === 'trigger')) throw new Error('Database contains triggers')
+}
+
 export function runMigrations(db) {
   const current = getSchemaVersion(db)
   for (let i = current; i < migrations.length; i++) {

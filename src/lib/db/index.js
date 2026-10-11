@@ -1,5 +1,5 @@
 import { loadSqlJs } from './sqljs'
-import { runMigrations } from './schema'
+import { runMigrations, validateSchema } from './schema'
 import { loadDbBytes, saveDbBytes, clearDbBytes } from './persist'
 
 let dbInstance = null
@@ -96,6 +96,17 @@ export async function exportBytes() {
 }
 
 export async function replaceWithBytes(bytes) {
+  // Validate the new file fully before touching the current DB, so a bad
+  // backup leaves the existing data in place.
+  const candidate = await openFromBytes(bytes)
+  try {
+    runMigrations(candidate)
+    validateSchema(candidate)
+  } catch (err) {
+    candidate.close()
+    throw err
+  }
+
   if (saveTimer) {
     clearTimeout(saveTimer)
     saveTimer = null
@@ -106,10 +117,8 @@ export async function replaceWithBytes(bytes) {
     } catch {
       // ignore
     }
-    dbInstance = null
   }
-  dbInstance = await openFromBytes(bytes)
-  runMigrations(dbInstance)
+  dbInstance = candidate
   await persistNow()
   return dbInstance
 }
