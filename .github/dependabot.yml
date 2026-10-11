@@ -14,3 +14,8 @@ updates:
       interval: weekly
     cooldown:
       default-days: 5
+    # Node majors are a deliberate choice: odd versions never become LTS and
+    # go end-of-life after ~8 months. Move to the next even LTS by hand.
+    ignore:
+      - dependency-name: node
+        update-types: ["version-update:semver-major"]
