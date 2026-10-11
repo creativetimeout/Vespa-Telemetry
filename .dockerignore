@@ -1,0 +1,14 @@
+# Keep the build context small and free of local data and secrets.
+# src/i18n/legal.*.local.json must NOT be listed here: the build needs it.
+.git
+.claude
+node_modules
+dist
+.env
+.env.*
+*.sqlite
+*.db
+Vespa_*.json
+docs
+documentation
+.DS_Store

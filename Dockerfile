@@ -1,12 +1,14 @@
 # ── Build stage ───────────────────────────────────────────────────────────────
-FROM node:24-alpine AS build
+FROM node:24-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1 AS build
 
 WORKDIR /app
 
 ENV NPM_CONFIG_UPDATE_NOTIFIER=false
 
 COPY package*.json ./
-RUN npm install --no-fund
+# npm ci installs exactly what package-lock.json pins; --ignore-scripts keeps
+# dependency lifecycle scripts from running during the build.
+RUN npm ci --no-fund --ignore-scripts
 
 COPY . .
 
@@ -17,9 +19,10 @@ ENV VITE_APP_VERSION=$VITE_APP_VERSION
 RUN npm run build
 
 # ── Serve stage ───────────────────────────────────────────────────────────────
-FROM nginx:alpine
+# Unprivileged nginx: runs as user nginx (uid 101) and listens on 8080.
+FROM nginxinc/nginx-unprivileged:alpine@sha256:b9241c6e7b8e9a862f129d8d4199ab64b10390949a78bdd5603379b32c844083
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 8080
