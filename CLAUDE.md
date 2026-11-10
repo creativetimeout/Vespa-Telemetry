@@ -12,7 +12,9 @@ npm run lint      # ESLint
 npm run test      # Vitest unit tests
 ```
 
-Requires Node ≥ 20.19 (or ≥ 22.12).
+Requires Node ≥ 22.12 (Vitest 5 supports 22.12+, 24, and ≥ 26; Node 25 is not supported). The Docker build uses Node 24 LTS.
+
+`npm run lint` currently reports 6 errors and 10 warnings on `main` (react-refresh, set-state-in-effect, no-empty, etc.). These are pre-existing, so compare against that baseline rather than expecting a clean run.
 
 ## Architecture
 
