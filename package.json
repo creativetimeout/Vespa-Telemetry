@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "egoroof-blowfish": "^4.0.2",
+    "egoroof-blowfish": "^4.0.3",
     "i18next": "^26.0.10",
     "i18next-browser-languagedetector": "^8.2.1",
     "leaflet": "^1.9.4",
